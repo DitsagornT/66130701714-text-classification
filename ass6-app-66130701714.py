@@ -32,7 +32,7 @@ if st.button('Classify'):
     prediction = model.predict(text_tfidf)
 
     # Display the prediction
-    if prediction[0] == 0:
+    if prediction[0] == 'neg':
         st.write('Negative')
     else:
         st.write('Positive')
