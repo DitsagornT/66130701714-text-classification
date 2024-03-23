@@ -1,23 +1,11 @@
 import streamlit as st
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
-from pythainlp.corpus import thai_stopwords
 import pickle
-import re
 
-def TextClaen(text):
-    text = re.sub('<[^>]*>', '', text)
-    emoticons = re.findall('(?::|;|=)(?:-)?(?:\)|\(|D|P)',
-                           text)
-    text = (re.sub('[\W]+', ' ', text.lower()) +
-            ' '.join(emoticons).replace('-', ''))
-    return text
-
-th_stop = list(thai_stopwords())
-tfidf = TfidfVectorizer(use_idf=True, norm= 'l2', smooth_idf=True,stop_words=th_stop, preprocessor=TextClaen)
+model,tfidf = pickle.load(open('svc_model-66130701714.sav', 'rb'))
 
 
-model = pickle.load(open('clf_model-66130701714.sav', 'rb'))
 
 st.title('Text Classification LogisticRegression App')
 
